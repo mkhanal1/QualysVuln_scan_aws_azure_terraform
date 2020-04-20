@@ -1,4 +1,4 @@
-# Qualysvm_scan_azure_vm_terraform
+# Qualysvm_scan_cloud_vm_terraform
 Terraform Template to create Qualys scanner in your subscription that will scan your AWS/Azure VMs
 
 # License
