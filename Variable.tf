@@ -1,81 +1,69 @@
-/*variable "instance_type" {
-  type = map(string)
-
-  default = {
-    default = "t2.nano"
-    dev     = "t2.micro"
-    prod    = "m4.large"
-    stg     = "t2.small"
-  }
-}
-*/
-variable "env_type" {
-  type = map(string)
-
-  default = {
-    default = "dev"
-    dev = "dev"
-    prod = "prod"
-    stg = "stg"
-  }
-}
- /*variable "subnet_id" {
-  type = string
-  default = "subnet-0e827b141d5c7d815"
-}
-*/
-
-
-
-
 data "aws_ami" "example" {
-  most_recent      = true
-  owners           = ["aws-marketplace"]
-
+  most_recent = true
+  owners      = ["aws-marketplace"]
   filter {
     name   = "product-code"
     values = ["1mp9h4zd2ze4biqif5schqeyu"]
   }
-
-}
- variable "instance_type" {
-   type = string
- }
-
- variable "vpc_id" {}
-
- variable "scannername" {
-   description = "A name for a scanner"
-   type = string
- }
-
- variable "username" {
-   description = "username for Qualys cloudview"
-   type = string
- }
- variable "password" {
-   description = "password for Qualys cloudview"
-   type = string
- }
-
- variable "baseurl" {
-   description = "url for Qualys cloudview"
-   type = string
- }
- data "aws_subnet_ids" "example" {
-  vpc_id = "vpc-0403cbbfb500d3fae"
 }
 
-data "aws_subnet" "example" {
-  for_each = data.aws_subnet_ids.example.ids
-  id       = each.value
+data "aws_ami" "target_ami" {
+  most_recent = true
+  owners      = ["amazon"]
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*"]
+  }
+    filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+    filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+}
+
+variable "instance_type" {
+  type        = string
+  description = "The Instance type"
+}
+
+variable "vpc_id" {
+  description = "The VPC ID"
+  type        = string
+}
+
+variable "key_name"{
+  type = string
 }
 
 variable "subnet_id" {
-  type = list
+  type    = string
 }
-/*
-variable "image_id" {
-  type = string
+
+variable "scannername" {
+  description = "A name for a scanner"
+  type        = string
 }
-*/
+
+variable "username" {
+  description = "username for Qualys cloudview"
+  type        = string
+}
+
+variable "password" {
+  description = "password for Qualys cloudview"
+  type        = string
+}
+
+variable "baseurl" {
+  description = "url for Qualys cloudview eg: https://qualysguard.qg2.apps.qualys.com"
+  type        = string
+}
+
+variable "optionprofile" {
+  type        = string
+  description = "The Scanning option Profile"
+}
