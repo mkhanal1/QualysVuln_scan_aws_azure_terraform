@@ -10,12 +10,12 @@ resource "aws_instance" "myec2" {
   subnet_id              = var.subnet_id
   vpc_security_group_ids = [aws_security_group.qualys-sg.id]
   user_data              = format("PERSCODE=%s",module.QualysVirtualScanner.stdout)
-
   tags = {
     Name = var.scannername
   }
   depends_on = [module.QualysVirtualScanner]
 }
+    
 #######################################################
 # Outputs
 #######################################################
