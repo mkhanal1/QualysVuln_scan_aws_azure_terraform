@@ -37,10 +37,12 @@ variable "vpc_id" {
 
 variable "key_name"{
   type = string
+  description = "The key for your target vulnerable machine"
 }
 
 variable "subnet_id" {
   type    = string
+  description = "The ID of Subnet where both Qualys Virtual Scanner & target machine will be launched"
 }
 
 variable "scannername" {
