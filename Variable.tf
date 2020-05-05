@@ -14,11 +14,11 @@ data "aws_ami" "target_ami" {
     name   = "name"
     values = ["amzn2-ami-hvm-*"]
   }
-    filter {
+  filter {
     name   = "architecture"
     values = ["x86_64"]
   }
-    filter {
+  filter {
     name   = "root-device-type"
     values = ["ebs"]
   }
@@ -35,13 +35,13 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "key_name"{
-  type = string
+variable "key_name" {
+  type        = string
   description = "The key for your target vulnerable machine"
 }
 
 variable "subnet_id" {
-  type    = string
+  type        = string
   description = "The ID of Subnet where both Qualys Virtual Scanner & target machine will be launched"
 }
 
